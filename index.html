@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wave on a String</title>
+    <title>Sinusoidal wave</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -46,7 +46,7 @@
 </head>
 <body class="bg-gray-900 text-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
-    <h1 class="text-3xl md:text-4xl font-bold mb-6 text-teal-300">Wave on a String Simulator</h1>
+    <h1 class="text-3xl md:text-4xl font-bold mb-6 text-teal-300">Sinusoidal wave</h1>
 
     <!-- Canvas for the wave visualization -->
     <canvas id="waveCanvas" class="bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl h-64 md:h-96 mb-6"></canvas>
@@ -119,7 +119,17 @@
                 const yCenter = canvas.height / 2;
                 const w = canvas.width;
 
-                // --- 1. Draw the continuous wave line ---
+                // --- 1. Draw the equilibrium line ---
+                ctx.strokeStyle = '#4a5568'; // gray-700
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]); // Make it a dashed line
+                ctx.beginPath();
+                ctx.moveTo(0, yCenter);
+                ctx.lineTo(w, yCenter);
+                ctx.stroke();
+                ctx.setLineDash([]); // Reset line dash
+
+                // --- 2. Draw the continuous wave line ---
                 ctx.strokeStyle = '#38b2ac'; // teal-500
                 ctx.lineWidth = 3;
                 ctx.shadowColor = '#38b2ac';
@@ -150,7 +160,7 @@
                 // Reset shadow before drawing beads
                 ctx.shadowBlur = 0;
 
-                // --- 2. Draw the "beads" (segment markers) on top ---
+                // --- 3. Draw the "beads" (segment markers) on top ---
                 const segmentLength = 15; 
                 ctx.fillStyle = '#a0aec0'; // gray-500
                 let beadIndex = 0; // Counter for the beads
@@ -203,5 +213,6 @@
     </script>
 </body>
 </html>
+
 
 
